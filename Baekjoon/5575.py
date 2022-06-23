@@ -1,16 +1,26 @@
-A = list(map(int,input().split()))
-B = list(map(int,input().split()))
-C = list(map(int,input().split()))
-result = list()
-# if A[3] > A[0] and A[4] > A[1] and A[5] > A[2]:
-#     print(A[3]-A[0], A[4]-A[1], A[5]-A[2])
-print(A)
-for i in range(2):
-    if A[i+3] < A[i]:
-        print(A[i])
-        A[i] = A[i] + 60
-        print(A[i])
-        A[i + 1] = A[i + 1] - 1
-        result[i] = (A[i + 3] - A[i])
-print(A)
-print(result)
+import datetime
+
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+C = list(map(int, input().split()))
+
+time_1 = datetime.timedelta(hours=A[0], minutes=A[1], seconds=A[2])
+time_2 = datetime.timedelta(hours=A[3], minutes=A[4], seconds=A[5])
+time = time_2 - time_1
+time = str(time).replace(":", " ")
+time = time.replace("00", "0")
+print(time)
+
+time_1 = datetime.timedelta(hours=B[0], minutes=B[1], seconds=B[2])
+time_2 = datetime.timedelta(hours=B[3], minutes=B[4], seconds=B[5])
+time = time_2 - time_1
+time = str(time).replace(":", " ")
+time = time.replace("00", "0")
+print(time)
+
+time_1 = datetime.timedelta(hours=C[0], minutes=C[1], seconds=C[2])
+time_2 = datetime.timedelta(hours=C[3], minutes=C[4], seconds=C[5])
+time = time_2 - time_1
+time = str(time).replace(":", " ")
+time = time.replace("00", "0")
+print(time)
