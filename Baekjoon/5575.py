@@ -1,26 +1,49 @@
-import datetime
-
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
 C = list(map(int, input().split()))
+r1, r2, r3 = 0, 0, 0
 
-time_1 = datetime.timedelta(hours=A[0], minutes=A[1], seconds=A[2])
-time_2 = datetime.timedelta(hours=A[3], minutes=A[4], seconds=A[5])
-time = time_2 - time_1
-time = str(time).replace(":", " ")
-time = time.replace("00", "0")
-print(time)
+if A[5] - A[2] < 0:
+    A[4] = A[4] - 1
+    A[5] = A[5] + 60
+    r3 = A[5] - A[2]
+else:
+    r3 = A[5] - A[2]
+if A[4] - A[1] < 0:
+    A[3] = A[3] - 1
+    A[4] = A[4] + 60
+    r2 = A[4] - A[1]
+else:
+    r2 = A[4] - A[1]
+r1 = A[3] - A[0]
+print(str(r1) + " " + str(r2) + " " + str(r3))
 
-time_1 = datetime.timedelta(hours=B[0], minutes=B[1], seconds=B[2])
-time_2 = datetime.timedelta(hours=B[3], minutes=B[4], seconds=B[5])
-time = time_2 - time_1
-time = str(time).replace(":", " ")
-time = time.replace("00", "0")
-print(time)
+if B[5] - B[2] < 0:
+    B[4] = B[4] - 1
+    B[5] = B[5] + 60
+    r3 = B[5] - B[2]
+else:
+    r3 = B[5] - B[2]
+if B[4] - B[1] < 0:
+    B[3] = B[3] - 1
+    B[4] = B[4] + 60
+    r2 = B[4] - B[1]
+else:
+    r2 = B[4] - B[1]
+r1 = B[3] - B[0]
+print(str(r1) + " " + str(r2) + " " + str(r3))
 
-time_1 = datetime.timedelta(hours=C[0], minutes=C[1], seconds=C[2])
-time_2 = datetime.timedelta(hours=C[3], minutes=C[4], seconds=C[5])
-time = time_2 - time_1
-time = str(time).replace(":", " ")
-time = time.replace("00", "0")
-print(time)
+if C[5] - C[2] < 0:
+    C[4] = C[4] - 1
+    C[5] = C[5] + 60
+    r3 = C[5] - C[2]
+else:
+    r3 = C[5] - C[2]
+if C[4] - C[1] < 0:
+    C[3] = C[3] - 1
+    C[4] = C[4] + 60
+    r2 = C[4] - C[1]
+else:
+    r2 = C[4] - C[1]
+r1 = C[3] - C[0]
+print(str(r1) + " " + str(r2) + " " + str(r3))
