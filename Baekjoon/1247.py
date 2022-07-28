@@ -1,5 +1,6 @@
 import sys
 
+# faster tip read line
 for i in range(3):
     t = int(sys.stdin.readline().strip())
     num_sum = 0
