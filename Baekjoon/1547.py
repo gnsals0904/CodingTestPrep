@@ -6,4 +6,4 @@ for i in range(t):
     n_list[X - 1] = n_list[Y - 1]
     n_list[Y - 1] = temp
     t = t - 1
-print(n_list[0])
+print(1 + n_list.index(1))
