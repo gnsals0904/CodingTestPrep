@@ -1,5 +1,5 @@
 P, K = map(int, input().split())
-n = K
+n = K - 1
 check = False
 a = [False, False] + [True] * (n - 1)
 primes = []
@@ -15,3 +15,5 @@ for n1 in primes:
         break
 if not check:
     print("GOOD")
+
+
