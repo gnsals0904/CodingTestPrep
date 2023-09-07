@@ -2,7 +2,7 @@
 x = int(input())
 
 # DP Table
-d = [0] * 30001
+d = [0] * 30000
 
 # DP Bottom - Up
 for i in range(2, x + 1):
