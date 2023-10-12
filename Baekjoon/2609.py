@@ -1,12 +1,14 @@
+def gcd(A, B):
+    if A % B != 0:
+        r = A % B
+        return gcd(B, r % B)
+    elif A == B:
+        return A
+    else:
+        return B
+
+
 a, b = map(int, input().split())
-
-for i in range(min(a, b), 0, -1):
-    if a % i == 0 and b % i == 0:
-        print(i)
-        break
-
-for j in range(max(a, b), a * b + 1):
-    if j % a == 0 and j % b == 0:
-        print(j, end='')
-        break
-
+c = gcd(a, b)
+print(c)
+print(a * b // c)
