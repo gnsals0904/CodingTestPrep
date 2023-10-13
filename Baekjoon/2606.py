@@ -1,19 +1,18 @@
 def dfs(graph, v, visited):
-    global result
-    result += 1
     visited[v] = True
+    addict_vertex.append(v)
 #    print(v, end=' ')
-    for j in range(2 * e + 1):
+    for j in range(vertex_num + 1):
         graph[j].sort()
     for i in graph[v]:
         if not visited[i]:
             dfs(graph, i, visited)
 
 
-v = int(input())
+vertex_num = int(input())
 e = int(input())
-result = 0
-graph = [[] for i in range(e * 2 + 1)]
+addict_vertex = list()
+graph = [[] for i in range(vertex_num + 1)]
 for k in range(e):
     x, y = map(int, input().split())
     if y not in graph[x]:
@@ -21,7 +20,7 @@ for k in range(e):
     if x not in graph[y]:
         graph[y].append(x)
 
-visited = [False] * (e * 2 + 1)
+visited = [False] * (vertex_num + 1)
 dfs(graph, 1, visited)
 
-print(result - 1)
+print(len(addict_vertex) - 1)
