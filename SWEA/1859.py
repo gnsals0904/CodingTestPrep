@@ -15,7 +15,6 @@ for test_case in range(1, T + 1):
             if predict_list:
                 max_value = max(predict_list)
                 max_value_index = predict_list.index(max_value)
-
     print("#" + str(testcase_num), result_sum)
     testcase_num += 1
 
