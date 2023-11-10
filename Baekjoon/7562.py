@@ -19,7 +19,7 @@ def bfs():
 
 
 t = int(input())
-vector = [[1, -2], [-2, -1], [-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2]]
+vector = [[-1, -2], [-2, -1], [-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2]]
 for _ in range(t):
     n = int(input())
     graph = [[0 for _ in range(n)] for _ in range(n)]
