@@ -1,22 +1,24 @@
 T = int(input())
-testcase_num = 1
 for test_case in range(1, T + 1):
     N = int(input())
     predict_list = list(map(int, input().split()))
     result_sum = 0
-    max_value = max(predict_list)
-    max_value_index = predict_list.index(max_value)
-    for x in predict_list:
-        now_value_index = predict_list.index(x)
-        if now_value_index < max_value_index:
-            result_sum += (max_value - predict_list[now_value_index])
-        else:
-            predict_list = predict_list[max_value_index + 1:N]
-            if predict_list:
-                max_value = max(predict_list)
-                max_value_index = predict_list.index(max_value)
-    print("#" + str(testcase_num), result_sum)
-    testcase_num += 1
+    # [0] => index // [1] => value
+    new_list = [[i, predict_list[i]] for i in range(N)]
+    new_list.sort(key=lambda x: x[1], reverse=True)
+    temp_j = -1
+    for j in range(N):
+        n_inx = new_list[j][0]
+        n_val = new_list[j][1]
+        if temp_j > n_inx:
+            continue
+        for k in range(temp_j + 1, n_inx):
+            result_sum += n_val - predict_list[k]
+        temp_j = n_inx
+        if n_inx == N - 1:
+            break
+    print("#" + str(test_case), result_sum)
+
 
 
 
