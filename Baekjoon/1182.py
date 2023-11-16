@@ -1,8 +1,10 @@
+from itertools import permutations, combinations
+
 N, S = map(int, input().split())
 num_list = list(map(int, input().split()))
 num_list.sort()
 visited = [False for _ in range(N)]
-num_sum = []
+um_sum = []
 result = []
 
 
