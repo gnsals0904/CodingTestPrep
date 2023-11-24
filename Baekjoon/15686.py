@@ -1,13 +1,13 @@
 import sys
-from itertools import permutations, product, combinations
+from itertools import combinations
 
 
 def cal_distance(per_nums):
-    # 최대 N의 크기가 50 이므로
     temp_result = 0
     for i1 in range(N):
         for j1 in range(N):
             if graph[i1][j1] == 1:
+                # 최대 N의 크기가 50 이므로
                 temp_dist = 101
                 ptr = 0
                 for now_cor in chicken_xy:
@@ -39,15 +39,22 @@ for i in range(N):
             chicken_xy.append([i, j])
             chicken_num += 1
     graph.append(one_line)
+
+# 리스트 초기화
 nums = [0 for _ in range(chicken_num)]
+# 전체 치킨집 개수에서 M개를 조합으로 뽑아 리스트를 생성
 combi = list(combinations(range(chicken_num), M))
+print(combi)
+# 전체 경우의 수를 담을 리스트
 perm_nums = []
 for com in combi:
+    # 초기화
     temp_nums = nums[:]
     for x in com:
         temp_nums[x] = 1
+    # 해당 경우의 수를 담아줌
     perm_nums.append(temp_nums)
-
+print(perm_nums)
 
 result = 100 * 50 * 50 + 1
 # 모든 경우에 대해서 수행
