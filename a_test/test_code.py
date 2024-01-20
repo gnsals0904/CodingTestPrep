@@ -1,22 +1,16 @@
+def cut(a,n): # a = 시작점
+    if n == 1:
+        return
+    for i in range(a + n//3, a +(n//3)*2): # 가운데 문자열을 공백으로
+        result[i] = ' '
+    cut(a, n//3) # 왼쪽 잘라나가기
+    cut(a + n//3 * 2, n//3) # 오른족 잘라나가기
 import sys
-input = sys.stdin.readline
-
-n = int(input())
-m = int(input())
-ans = abs(100 - n)
-
-if m != 0: #고장난 버튼 존재
-    b = list(input().split())
-else:
-    b = []
-
-#큰 수에서 작은 수로 내려오는 경우도 있으므로 1000000까지 for문 탐색
-#작은 수 -> 큰 수: 0 ~ 500000, 큰 수 -> 작은 수: 500001 ~ 1000000
-for i in range(1000001):
-    for j in str(i):
-        if j in b: #해당 숫자 버튼이 고장난 경우
-            break
-    else:
-        ans = min(ans, len(str(i)) + abs(i - n)) #min(기존답, 숫자 버튼 클릭 수 + '+/-' 버튼 클릭 수)
-
-print(ans)
+while True:
+    try :
+        N = int(sys.stdin.readline())
+        result = ['-']*(3**N) # 최초 리스트 집합
+        cut(0,3**N) # 자르기
+        print(''.join(result))
+    except : # EOF 발생시
+        break # 종료
