@@ -1,4 +1,4 @@
-package bj;
+package ssafy_git;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.util.StringTokenizer;
 
 public class Problem15684 {
 	static boolean[][] ladder;
-	static boolean[][] temp_ladder;
 	static int N;
 	static int M;
 	static int H;
@@ -24,13 +23,11 @@ public class Problem15684 {
 		// 초기 세팅
 		int a, b;
 		ladder = new boolean[H][N - 1];
-		temp_ladder = new boolean[H][N - 1];
 		for (int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
 			a = Integer.parseInt(st.nextToken());
 			b = Integer.parseInt(st.nextToken());
 			ladder[a - 1][b - 1] = true;
-			temp_ladder[a - 1][b - 1] = true;
 		}
 		if (valid()) {
 			System.out.println(0);
@@ -46,23 +43,6 @@ public class Problem15684 {
 
 	}
 
-	// 현재 놓은 사다리의 개수가 짝수개가 있는지 확인하는 메서드
-	static boolean is_even() {
-		// 각 라인의 사다리가 가로로 짝수개가 있어야 돌아갈 수 있다.
-		for (int i = 0; i < N - 1; i++) {
-			int count = 0;
-			for (int j = 0; j < H; j++) {
-				if (temp_ladder[j][i]) {
-					count++;
-				}
-			}
-			if (count % 2 == 1) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 	// 각 사다리 출발시 자기 자리로 돌아갔는지 확인하는 메서드
 	static boolean im_back(int idx) {
 		// 어느 세로선에서 출발했는지 저장한다.
@@ -74,7 +54,7 @@ public class Problem15684 {
 			// 맨 왼쪽일 경우 오른쪽만 확인해주면 된다.
 			if (idx == 0) {
 				// true 면 오른쪽으로 가기위해서 idx 를 증가시킨다
-				if (temp_ladder[now_x][idx]) {
+				if (ladder[now_x][idx]) {
 					now_x++;
 					idx++;
 				}
@@ -86,7 +66,7 @@ public class Problem15684 {
 			// 맨 오른쪽 경우 왼쪽만 확인해준다.
 			else if (idx == N - 1) {
 				// true 면 왼쪽으로 간다
-				if (temp_ladder[now_x][idx - 1]) {
+				if (ladder[now_x][idx - 1]) {
 					idx--;
 					now_x++;
 				}
@@ -99,12 +79,12 @@ public class Problem15684 {
 			else {
 				// 양쪽 확인
 				// 왼쪽으로 가는경우
-				if (temp_ladder[now_x][idx - 1]) {
+				if (ladder[now_x][idx - 1]) {
 					idx--;
 					now_x++;
 				}
 				// 오른쪽으로 가는 경우
-				else if (temp_ladder[now_x][idx]) {
+				else if (ladder[now_x][idx]) {
 					now_x++;
 					idx++;
 				}
@@ -126,12 +106,6 @@ public class Problem15684 {
 
 	// 현재 놓은 사다리가 괜찮은지 확인하는 메서드
 	static boolean valid() {
-		// 각 라인의 사다리가 가로로 짝수개가 있어야 돌아갈 수 있다.
-		// 짝수개가 아니라면 false 를 출력한다.
-		if (!is_even()) {
-			return false;
-		}
-		// 일단 전체 짝수긴 하니 한번 돌려보자
 		for (int i = 0; i < N; i++) {
 			if (!im_back(i)) {
 				return false;
@@ -144,19 +118,19 @@ public class Problem15684 {
 	// 현재 위치에 사다리를 놓을 수 있는지 체크한다
 	static boolean can_put(int x, int y) {
 		// 이미 놓여있는 경우, 놓을 수 없다
-		if (temp_ladder[x][y]) {
+		if (ladder[x][y]) {
 			return false;
 		}
 		// 옆에 사다리가 이미 놓아져있으면 놓을 수 없음
 		// 왼쪽 확인
 		if (y - 1 >= 0) {
-			if (temp_ladder[x][y - 1]) {
+			if (ladder[x][y - 1]) {
 				return false;
 			}
 		}
 		// 오른쪽 확인
 		if (y + 1 < N - 1) {
-			if (temp_ladder[x][y + 1]) {
+			if (ladder[x][y + 1]) {
 				return false;
 			}
 		}
@@ -176,13 +150,13 @@ public class Problem15684 {
 				continue;
 			}
 			// 사다리를 해당 위치에 놓고
-			temp_ladder[x1][y1] = true;
+			ladder[x1][y1] = true;
 			// 전부 제대로 내려가는지 확인
 			if (valid()) {
 				return true;
 			}
 			// 사다리 되돌리기
-			temp_ladder[x1][y1] = false;
+			ladder[x1][y1] = false;
 		}
 		// 모든 경우의 수를 진행했지만 valid 하지 않으면 false
 		return false;
@@ -201,25 +175,25 @@ public class Problem15684 {
 				continue;
 			}
 			// 놓고
-			temp_ladder[x1][y1] = true;
+			ladder[x1][y1] = true;
 			// 다음 사다리 놓기
 			for (int j = i + 1; j < (N - 1) * H; j++) {
 				x2 = j / (N - 1);
 				y2 = j % (N - 1);
-				if (temp_ladder[x2][y2])
+				if (ladder[x2][y2])
 					continue;
 				// 놓을 수 없다면 다음 경우의 수 진행
 				if(!can_put(x2, y2)) {
 					continue;
 				}
-				temp_ladder[x2][y2] = true;
+				ladder[x2][y2] = true;
 				if (valid()) {
 					return true;
 				}
 				// 사다리 되돌리기
-				temp_ladder[x2][y2] = false;
+				ladder[x2][y2] = false;
 			}
-			temp_ladder[x1][y1] = false;
+			ladder[x1][y1] = false;
 		}
 		// 모든 경우의 수를 진행했지만 valid 하지 않으면 false
 		return false;
@@ -236,7 +210,7 @@ public class Problem15684 {
 			if(!can_put(x1, y1)) {
 				continue;
 			}
-			temp_ladder[x1][y1] = true;
+			ladder[x1][y1] = true;
 			// 2번재 사다리 놓기
 			for (int j = i + 1; j < (N - 1) * H; j++) {
 				x2 = j / (N - 1);
@@ -245,7 +219,7 @@ public class Problem15684 {
 				if(!can_put(x2, y2)) {
 					continue;
 				}
-				temp_ladder[x2][y2] = true;
+				ladder[x2][y2] = true;
 				// 3번째 사다리 놓기
 				for (int k = j + 1; k < (N - 1) * H; k++) {
 					x3 = k / (N - 1);
@@ -255,25 +229,17 @@ public class Problem15684 {
 						continue;
 					}
 					// 놓고
-					temp_ladder[x3][y3] = true;
+					ladder[x3][y3] = true;
 					if (valid()) {
 						return true;
 					}
 					// 사다리 되돌리기
-					temp_ladder[x3][y3] = false;
+					ladder[x3][y3] = false;
 				}
-				temp_ladder[x2][y2] = false;
+				ladder[x2][y2] = false;
 			}
-			temp_ladder[x1][y1] = false;
+			ladder[x1][y1] = false;
 		}
 		return false;
-	}
-
-	// 배열 출력하기
-	static void print_arr(String s) {
-		System.out.println("ㅡㅡㅡ" + s + "ㅡㅡㅡ");
-		for (int l = 0; l < H; l++) {
-			System.out.println(Arrays.toString(temp_ladder[l]));
-		}
 	}
 }
