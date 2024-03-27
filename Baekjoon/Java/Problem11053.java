@@ -3,7 +3,6 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Problem11053 {
@@ -12,7 +11,8 @@ public class Problem11053 {
 		BufferedReader br = new BufferedReader(ir);
 		int N = Integer.parseInt(br.readLine());
 		int[] arr = new int[N];
-		int[] lis = new int[N];
+		int[] lis = new int[N + 1];
+		lis[N] = 0;
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < N; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
@@ -31,7 +31,7 @@ public class Problem11053 {
 			}
 		}
 		int max_len = 0;
-		for(int i = 0; i < N; i++) {
+		for(int i = 0; i < N + 1; i++) {
 			if(lis[i] == 0) {
 				max_len = i;
 				break;
